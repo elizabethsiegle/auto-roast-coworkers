@@ -44,24 +44,9 @@ def test_post_roast_calls_all_sources_and_returns_report(client):
     assert response.status_code == 200
     data = response.json()
     assert data["title"] == "The Complete Dossier on John Smith"
+    assert data["sources"] == {"slack": 2, "email": 1, "transcripts": 0}
     mock_slack.get_messages_by_user.assert_called_once_with("John Smith")
     mock_gmail.get_messages_from_sender.assert_called_once_with("John Smith")
-
-
-def test_upload_transcript_stores_speaker_lines(client):
-    c, _, _, _, _ = client
-    vtt = b"""WEBVTT
-
-00:00:01.000 --> 00:00:05.000
-John Smith: Let's take this offline and circle back"""
-
-    response = c.post(
-        "/api/upload-transcript",
-        data={"name": "John Smith"},
-        files={"file": ("meeting.vtt", vtt, "text/vtt")}
-    )
-    assert response.status_code == 200
-    assert response.json()["lines_added"] == 1
 
 
 def test_sync_transcripts_merges_speaker_lines(client):
