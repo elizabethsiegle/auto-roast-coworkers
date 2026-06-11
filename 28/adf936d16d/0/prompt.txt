@@ -26,3 +26,7 @@ perf
 ---
 
 2
+
+---
+
+make sure no transcripts are pushed to github, nothing that should be private from the company slack or transcripts. if they are, remove them
