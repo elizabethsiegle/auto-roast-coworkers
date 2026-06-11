@@ -15,6 +15,10 @@ export async function fetchRoast(name) {
   return res.json()
 }
 
+export async function syncTranscripts() {
+  await fetch('/api/sync-transcripts')
+}
+
 export async function uploadTranscript(name, file) {
   const formData = new FormData()
   formData.append('name', name)

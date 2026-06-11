@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Sidebar from './components/Sidebar'
 import RoastPanel from './components/RoastPanel'
-import { fetchCoworkers, fetchRoast, uploadTranscript } from './api'
+import { fetchCoworkers, fetchRoast, uploadTranscript, syncTranscripts } from './api'
 
 export default function App() {
   const [coworkers, setCoworkers] = useState([])
@@ -11,6 +11,7 @@ export default function App() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
+    syncTranscripts()
     fetchCoworkers()
       .then(setCoworkers)
       .catch(() => setError('Failed to load coworkers — is the backend running?'))
