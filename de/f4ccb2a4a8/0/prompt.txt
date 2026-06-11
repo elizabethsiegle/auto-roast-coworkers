@@ -1,0 +1,45 @@
+2
+
+---
+
+https://github.com/elizabethsiegle/auto-roast-coworkers
+
+---
+
+where do i get slack token and google credentials path? include directions and links please
+
+---
+
+commands to run app?
+
+---
+
+i can drop a meeting transcript into the webapp but can it be automated from meetings i am in
+
+---
+
+yes
+
+---
+
+yes
+
+---
+
+no button, do it in background upon loading the page
+
+---
+
+last 30 days
+
+---
+
+b
+
+---
+
+yes
+
+---
+
+yes
