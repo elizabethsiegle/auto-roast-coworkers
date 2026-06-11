@@ -82,7 +82,7 @@ function Sources({ sources }) {
   if (!sources) return null
   const items = [
     sources.slack > 0 && `Slack: ${sources.slack} messages`,
-    sources.email > 0 && `Email: ${sources.email} threads`,
+    sources.email > 0 && `Email: ${sources.email} messages`,
     sources.transcripts > 0 && `Transcripts: ${sources.transcripts} lines`,
   ].filter(Boolean)
   if (items.length === 0) return null
