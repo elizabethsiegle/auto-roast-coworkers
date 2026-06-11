@@ -33,34 +33,46 @@ class GmailClient:
     def get_recent_senders(self, max_results: int = 200) -> list[str]:
         if self.service is None:
             return []
-        results = self.service.users().messages().list(
-            userId='me', maxResults=max_results, labelIds=['INBOX']
-        ).execute()
-        names: set[str] = set()
-        for msg in results.get('messages', []):
-            detail = self.service.users().messages().get(
-                userId='me', id=msg['id'], format='metadata',
-                metadataHeaders=['From']
+        try:
+            results = self.service.users().messages().list(
+                userId='me', maxResults=max_results, labelIds=['INBOX']
             ).execute()
-            for header in detail.get('payload', {}).get('headers', []):
-                if header['name'] == 'From':
-                    name = header['value'].split('<')[0].strip().strip('"')
-                    if name:
-                        names.add(name)
-        return list(names)
+            names: set[str] = set()
+            for msg in results.get('messages', []):
+                try:
+                    detail = self.service.users().messages().get(
+                        userId='me', id=msg['id'], format='metadata',
+                        metadataHeaders=['From']
+                    ).execute()
+                    for header in detail.get('payload', {}).get('headers', []):
+                        if header['name'] == 'From':
+                            name = header['value'].split('<')[0].strip().strip('"')
+                            if name:
+                                names.add(name)
+                except Exception:
+                    continue
+            return list(names)
+        except Exception:
+            return []
 
     def get_messages_from_sender(self, name: str, max_results: int = 50) -> list[str]:
         if self.service is None:
             return []
-        results = self.service.users().messages().list(
-            userId='me', q=name, maxResults=max_results
-        ).execute()
-        snippets = []
-        for msg in results.get('messages', []):
-            detail = self.service.users().messages().get(
-                userId='me', id=msg['id'], format='metadata'
+        try:
+            results = self.service.users().messages().list(
+                userId='me', q=name, maxResults=max_results
             ).execute()
-            snippet = detail.get('snippet', '')
-            if snippet:
-                snippets.append(snippet)
-        return snippets
+            snippets = []
+            for msg in results.get('messages', []):
+                try:
+                    detail = self.service.users().messages().get(
+                        userId='me', id=msg['id'], format='metadata'
+                    ).execute()
+                    snippet = detail.get('snippet', '')
+                    if snippet:
+                        snippets.append(snippet)
+                except Exception:
+                    continue
+            return snippets
+        except Exception:
+            return []
