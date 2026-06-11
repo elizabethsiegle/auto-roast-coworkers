@@ -1,0 +1,28 @@
+perfect now it says (.venv) lizziesiegle@Lizzies-MacBook-Pro backend % source .venv/bin/activate
+uvicorn main:app --reload --port 8000
+INFO:     Will watch for changes in these directories: ['/Users/lizziesiegle/Desktop/demos/roast-coworkers/backend']
+ERROR:    [Errno 48] Address already in use
+
+---
+
+amazing. now i dont want to add meeting transcripts to add evidence for a coworker i select. i want it to already have those for each coworker (or some cowrokers)
+
+---
+
+yes remove endpoint from the backend. and in the generated roast for someone,  provide citations or some proof that data influenced something in the roast
+
+---
+
+yes
+
+---
+
+perf
+
+---
+
+1
+
+---
+
+2
