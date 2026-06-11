@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 
 from slack_client import SlackClient
 from gmail_client import GmailClient
+from drive_client import DriveClient
 from roast_generator import RoastGenerator
 from transcript_parser import parse_transcript
 
@@ -21,6 +22,8 @@ app.add_middleware(
 
 slack = SlackClient(os.getenv("SLACK_TOKEN", ""))
 gmail = GmailClient(credentials_path=os.getenv("GOOGLE_CREDENTIALS_PATH", ""))
+drive = DriveClient(credentials_path=os.getenv("GOOGLE_CREDENTIALS_PATH", ""),
+                    token_path="drive_token.json")
 roast_gen = RoastGenerator(os.getenv("ANTHROPIC_API_KEY", ""))
 
 transcripts: dict[str, list[str]] = {}
@@ -60,3 +63,13 @@ async def upload_transcript(name: str = Form(...), file: UploadFile = File(...))
     lines = lines_by_speaker.get(name, [])
     transcripts.setdefault(name, []).extend(lines)
     return {"status": "ok", "lines_added": len(lines)}
+
+
+@app.get("/api/sync-transcripts")
+async def sync_transcripts():
+    result = drive.get_meet_transcripts(days=30)
+    total = 0
+    for speaker, lines in result.items():
+        transcripts.setdefault(speaker, []).extend(lines)
+        total += len(lines)
+    return {"status": "ok", "speakers_found": len(result), "lines_added": total}
