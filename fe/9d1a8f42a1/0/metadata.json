@@ -1,0 +1,152 @@
+{
+  "cli_version": "0.7.5",
+  "checkpoint_id": "fe9d1a8f42a1",
+  "session_id": "37592167-944b-4437-bea4-b2768378700c",
+  "strategy": "manual-commit",
+  "created_at": "2026-06-11T14:27:27.245145Z",
+  "branch": "main",
+  "checkpoints_count": 2,
+  "files_touched": [],
+  "agent": "Claude Code",
+  "model": "claude-sonnet-4-6",
+  "turn_id": "e5adc42858f9",
+  "token_usage": {
+    "input_tokens": 51,
+    "cache_creation_tokens": 44057,
+    "cache_read_tokens": 1232398,
+    "output_tokens": 13084,
+    "api_call_count": 29
+  },
+  "skill_events_version": 1,
+  "skill_events": [
+    {
+      "id": "claude-skill-toolu_01J2WVDJzfvjBx5CxhgUL2QK",
+      "event_type": "tool_invocation",
+      "skill": {
+        "name": "superpowers:brainstorming"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "skill_tool_use",
+        "confidence": "explicit"
+      },
+      "turn_id": "e5adc42858f9",
+      "transcript_anchor": {
+        "unit": "line",
+        "start": 27,
+        "end": 28,
+        "entry_ids": [
+          "f2f9cb20-1dc4-4d7e-bf63-a69ff8762ace"
+        ],
+        "tool_use_id": "toolu_01J2WVDJzfvjBx5CxhgUL2QK"
+      },
+      "native": {
+        "tool_name": "Skill",
+        "tool_use_id": "toolu_01J2WVDJzfvjBx5CxhgUL2QK"
+      },
+      "collapse": {
+        "target": "tool_pair",
+        "label": "Skill: superpowers:brainstorming",
+        "default_collapsed": true
+      }
+    },
+    {
+      "id": "claude-skill-toolu_01CUzjJ9bhU8TBskojWBs5Ue",
+      "event_type": "tool_invocation",
+      "skill": {
+        "name": "superpowers:writing-plans"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "skill_tool_use",
+        "confidence": "explicit"
+      },
+      "turn_id": "e5adc42858f9",
+      "transcript_anchor": {
+        "unit": "line",
+        "start": 100,
+        "end": 101,
+        "entry_ids": [
+          "ca8f8167-f3f5-4163-ba90-05e99926f1c3"
+        ],
+        "tool_use_id": "toolu_01CUzjJ9bhU8TBskojWBs5Ue"
+      },
+      "native": {
+        "tool_name": "Skill",
+        "tool_use_id": "toolu_01CUzjJ9bhU8TBskojWBs5Ue"
+      },
+      "collapse": {
+        "target": "tool_pair",
+        "label": "Skill: superpowers:writing-plans",
+        "default_collapsed": true
+      }
+    },
+    {
+      "id": "claude-skill-toolu_01HMcp1Ai7s8pWsfGPyXwjjc",
+      "event_type": "tool_invocation",
+      "skill": {
+        "name": "superpowers:subagent-driven-development"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "skill_tool_use",
+        "confidence": "explicit"
+      },
+      "turn_id": "e5adc42858f9",
+      "transcript_anchor": {
+        "unit": "line",
+        "start": 132,
+        "end": 133,
+        "entry_ids": [
+          "84e36d34-e8c6-406a-8fd7-37bba2f5446b"
+        ],
+        "tool_use_id": "toolu_01HMcp1Ai7s8pWsfGPyXwjjc"
+      },
+      "native": {
+        "tool_name": "Skill",
+        "tool_use_id": "toolu_01HMcp1Ai7s8pWsfGPyXwjjc"
+      },
+      "collapse": {
+        "target": "tool_pair",
+        "label": "Skill: superpowers:subagent-driven-development",
+        "default_collapsed": true
+      }
+    }
+  ],
+  "session_metrics": {
+    "turn_count": 5
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 3,
+      "user_lines_added": 882,
+      "user_lines_removed": 0,
+      "agent_lines_added": 28,
+      "agent_lines_removed": 7,
+      "user_added_per_file": {
+        ".claude/agents/entire-search.md": 25,
+        ".claude/settings.json": 84,
+        ".claude/settings.local.json": 25,
+        ".codex/agents/entire-search.toml": 23,
+        ".codex/config.toml": 3,
+        ".codex/hooks.json": 52,
+        ".cursor/hooks.json": 40,
+        ".factory/settings.json": 90,
+        ".gemini/agents/entire-search.md": 28,
+        ".gemini/settings.json": 141,
+        ".github/hooks/entire.json": 61,
+        ".opencode/plugins/entire.ts": 216,
+        ".pi/extensions/entire/index.ts": 92,
+        "backend/credentials.json": 1,
+        "backend/drive_token.json": 1
+      }
+    }
+  ]
+}
