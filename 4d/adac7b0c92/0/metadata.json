@@ -1,0 +1,100 @@
+{
+  "cli_version": "0.7.5",
+  "checkpoint_id": "4dadac7b0c92",
+  "session_id": "861b64c9-cad2-4b06-9986-0bc6694609fd",
+  "strategy": "manual-commit",
+  "created_at": "2026-06-11T04:06:00.009727Z",
+  "branch": "main",
+  "checkpoints_count": 0,
+  "files_touched": [
+    "backend/slack_client.py",
+    "backend/tests/test_slack_client.py"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-sonnet-4-6",
+  "turn_id": "76b0624867e9",
+  "token_usage": {
+    "input_tokens": 2779,
+    "cache_creation_tokens": 62203,
+    "cache_read_tokens": 1008139,
+    "output_tokens": 5729,
+    "api_call_count": 20
+  },
+  "skill_events_version": 1,
+  "skill_events": [
+    {
+      "id": "claude-skill-toolu_014WwdjXo6KnU5riZNk7zVZq",
+      "event_type": "tool_invocation",
+      "skill": {
+        "name": "superpowers:subagent-driven-development"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "skill_tool_use",
+        "confidence": "explicit"
+      },
+      "turn_id": "76b0624867e9",
+      "transcript_anchor": {
+        "unit": "line",
+        "start": 42,
+        "end": 43,
+        "entry_ids": [
+          "4b76453f-0589-4b79-8db9-5667f99eb6f3"
+        ],
+        "tool_use_id": "toolu_014WwdjXo6KnU5riZNk7zVZq"
+      },
+      "native": {
+        "tool_name": "Skill",
+        "tool_use_id": "toolu_014WwdjXo6KnU5riZNk7zVZq"
+      },
+      "collapse": {
+        "target": "tool_pair",
+        "label": "Skill: superpowers:subagent-driven-development",
+        "default_collapsed": true
+      }
+    }
+  ],
+  "initial_attribution": {
+    "calculated_at": "2026-06-11T04:06:00.001267Z",
+    "agent_lines": 84,
+    "agent_removed": 0,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 84,
+    "total_lines_changed": 84,
+    "agent_percentage": 100,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 901,
+      "user_lines_removed": 7,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        ".claude/agents/entire-search.md": 25,
+        ".claude/settings.json": 84,
+        ".claude/settings.local.json": 18,
+        ".codex/agents/entire-search.toml": 23,
+        ".codex/config.toml": 3,
+        ".codex/hooks.json": 52,
+        ".cursor/hooks.json": 40,
+        ".factory/settings.json": 90,
+        ".gemini/agents/entire-search.md": 28,
+        ".gemini/settings.json": 141,
+        ".github/hooks/entire.json": 61,
+        ".opencode/plugins/entire.ts": 216,
+        ".pi/extensions/entire/index.ts": 92,
+        "backend/tests/test_transcript_parser.py": 10,
+        "backend/transcript_parser.py": 13,
+        "docs/superpowers/specs/2026-06-11-roast-coworkers-design.md": 5
+      },
+      "user_removed_per_file": {
+        "backend/transcript_parser.py": 2,
+        "docs/superpowers/specs/2026-06-11-roast-coworkers-design.md": 5
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "cli_version": "0.7.5",
+  "checkpoint_id": "4dadac7b0c92",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 0,
+  "files_touched": [
+    "backend/slack_client.py",
+    "backend/tests/test_slack_client.py"
+  ],
+  "sessions": [
+    {
+      "metadata": "/4d/adac7b0c92/0/metadata.json",
+      "transcript": "/4d/adac7b0c92/0/full.jsonl",
+      "content_hash": "/4d/adac7b0c92/0/content_hash.txt",
+      "prompt": "/4d/adac7b0c92/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 2779,
+    "cache_creation_tokens": 62203,
+    "cache_read_tokens": 1008139,
+    "output_tokens": 5729,
+    "api_call_count": 20
+  }
+}
