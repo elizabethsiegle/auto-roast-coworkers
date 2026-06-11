@@ -12,7 +12,10 @@ class GmailClient:
         if service is not None:
             self.service = service
         elif credentials_path:
-            self.service = self._build_service(credentials_path, token_path)
+            try:
+                self.service = self._build_service(credentials_path, token_path)
+            except Exception:
+                self.service = None
         else:
             self.service = None
 
@@ -30,7 +33,7 @@ class GmailClient:
                 f.write(creds.to_json())
         return build('gmail', 'v1', credentials=creds)
 
-    def get_recent_senders(self, max_results: int = 200) -> list[str]:
+    def get_recent_senders(self, max_results: int = 20) -> list[str]:
         if self.service is None:
             return []
         try:
@@ -60,7 +63,7 @@ class GmailClient:
             return []
         try:
             results = self.service.users().messages().list(
-                userId='me', q=name, maxResults=max_results
+                userId='me', q=f"from:{name}", maxResults=max_results
             ).execute()
             snippets = []
             for msg in results.get('messages', []):

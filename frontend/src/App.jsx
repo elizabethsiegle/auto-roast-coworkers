@@ -35,6 +35,7 @@ export default function App() {
     if (!selected) return
     try {
       await uploadTranscript(selected, file)
+      await handleSelect(selected)
     } catch {
       setError('Failed to upload transcript.')
     }

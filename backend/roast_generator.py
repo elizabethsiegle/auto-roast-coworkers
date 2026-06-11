@@ -42,7 +42,11 @@ class RoastGenerator:
         )
         if not message.content or not hasattr(message.content[0], 'text'):
             raise ValueError("Unexpected response structure from Claude API")
+        text = message.content[0].text.strip()
+        if text.startswith('```'):
+            text = text.split('\n', 1)[1] if '\n' in text else text
+            text = text.rsplit('```', 1)[0].strip()
         try:
-            return json.loads(message.content[0].text)
+            return json.loads(text)
         except json.JSONDecodeError as e:
             raise ValueError(f"Claude returned invalid JSON: {e}") from e

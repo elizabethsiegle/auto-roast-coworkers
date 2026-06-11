@@ -32,7 +32,9 @@ class RoastRequest(BaseModel):
 
 @app.get("/api/coworkers")
 async def get_coworkers():
-    return {"coworkers": sorted(slack.get_workspace_members())}
+    members = set(slack.get_workspace_members())
+    members.update(gmail.get_recent_senders())
+    return {"coworkers": sorted(members)}
 
 
 @app.post("/api/roast")
