@@ -22,7 +22,7 @@ export default function RoastPanel({ selected, report, loading, error, onUpload 
         <UploadZone
           selectedName={selected}
           onDrop={handleDrop}
-          onClick={() => fileInputRef.current.click()}
+          onClick={() => fileInputRef.current?.click()}
         >
           <input
             ref={fileInputRef}
@@ -76,7 +76,7 @@ function Report({ report }) {
       <h1 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '32px', color: '#fff', lineHeight: 1.3 }}>
         {report.title}
       </h1>
-      {report.sections.map(section => (
+      {(report.sections || []).map(section => (
         <div key={section.heading} style={{
           background: '#1a1a1a',
           border: '1px solid #2a2a2a',
