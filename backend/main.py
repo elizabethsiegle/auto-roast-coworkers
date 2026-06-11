@@ -1,5 +1,5 @@
 import os
-from fastapi import FastAPI, UploadFile, File, Form
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from dotenv import load_dotenv
@@ -41,13 +41,20 @@ async def roast(request: RoastRequest):
     evidence.extend(slack.get_messages_by_user(request.name))
     evidence.extend(gmail.get_messages_from_sender(request.name))
     evidence.extend(transcripts.get(request.name, []))
-    return roast_gen.generate(request.name, evidence)
+    try:
+        return roast_gen.generate(request.name, evidence)
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e))
 
 
 @app.post("/api/upload-transcript")
 async def upload_transcript(name: str = Form(...), file: UploadFile = File(...)):
     content = await file.read()
-    lines_by_speaker = parse_transcript(content.decode(), file.filename)
+    try:
+        text = content.decode()
+    except UnicodeDecodeError:
+        raise HTTPException(status_code=400, detail="File must be UTF-8 encoded")
+    lines_by_speaker = parse_transcript(text, file.filename)
     lines = lines_by_speaker.get(name, [])
     transcripts.setdefault(name, []).extend(lines)
     return {"status": "ok", "lines_added": len(lines)}
