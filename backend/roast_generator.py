@@ -40,4 +40,9 @@ class RoastGenerator:
                 )
             }]
         )
-        return json.loads(message.content[0].text)
+        if not message.content or not hasattr(message.content[0], 'text'):
+            raise ValueError("Unexpected response structure from Claude API")
+        try:
+            return json.loads(message.content[0].text)
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Claude returned invalid JSON: {e}") from e
