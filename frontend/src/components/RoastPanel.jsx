@@ -1,14 +1,4 @@
-import { useRef } from 'react'
-
-export default function RoastPanel({ selected, report, loading, error, onUpload }) {
-  const fileInputRef = useRef(null)
-
-  function handleDrop(e) {
-    e.preventDefault()
-    const file = e.dataTransfer.files[0]
-    if (file) onUpload(file)
-  }
-
+export default function RoastPanel({ selected, report, loading, error }) {
   return (
     <main style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       <div style={{ flex: 1, overflowY: 'auto', padding: '40px' }}>
@@ -17,22 +7,6 @@ export default function RoastPanel({ selected, report, loading, error, onUpload 
         {selected && error && <ErrorMessage message={error} />}
         {selected && report && !loading && <Report report={report} />}
       </div>
-
-      {selected && (
-        <UploadZone
-          selectedName={selected}
-          onDrop={handleDrop}
-          onClick={() => fileInputRef.current?.click()}
-        >
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".vtt,.txt"
-            style={{ display: 'none' }}
-            onChange={e => { const f = e.target.files[0]; if (f) onUpload(f) }}
-          />
-        </UploadZone>
-      )}
     </main>
   )
 }
@@ -99,32 +73,29 @@ function Report({ report }) {
           </p>
         </div>
       ))}
+      <Sources sources={report.sources} />
     </div>
   )
 }
 
-function UploadZone({ selectedName, onDrop, onClick, children }) {
+function Sources({ sources }) {
+  if (!sources) return null
+  const items = [
+    sources.slack > 0 && `Slack: ${sources.slack} messages`,
+    sources.email > 0 && `Email: ${sources.email} threads`,
+    sources.transcripts > 0 && `Transcripts: ${sources.transcripts} lines`,
+  ].filter(Boolean)
+  if (items.length === 0) return null
   return (
-    <div
-      onDrop={onDrop}
-      onDragOver={e => e.preventDefault()}
-      onClick={onClick}
-      style={{
-        borderTop: '1px solid #2a2a2a',
-        padding: '14px 40px',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '10px',
-        color: '#555',
-        fontSize: '13px',
-        cursor: 'pointer',
-      }}
-      onMouseEnter={e => e.currentTarget.style.background = '#141414'}
-      onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
-    >
-      <span style={{ fontSize: '16px' }}>📎</span>
-      Drop a meeting transcript (.vtt or .txt) to add evidence for {selectedName}
-      {children}
+    <div style={{
+      marginTop: '8px',
+      padding: '12px 16px',
+      borderTop: '1px solid #2a2a2a',
+      color: '#555',
+      fontSize: '12px',
+    }}>
+      <span style={{ color: '#444', fontWeight: '600', marginRight: '8px' }}>Sources</span>
+      {items.join(' · ')}
     </div>
   )
 }

@@ -18,15 +18,3 @@ export async function fetchRoast(name) {
 export async function syncTranscripts() {
   await fetch('/api/sync-transcripts')
 }
-
-export async function uploadTranscript(name, file) {
-  const formData = new FormData()
-  formData.append('name', name)
-  formData.append('file', file)
-  const res = await fetch('/api/upload-transcript', {
-    method: 'POST',
-    body: formData,
-  })
-  if (!res.ok) throw new Error('Failed to upload transcript')
-  return res.json()
-}

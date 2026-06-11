@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Sidebar from './components/Sidebar'
 import RoastPanel from './components/RoastPanel'
-import { fetchCoworkers, fetchRoast, uploadTranscript, syncTranscripts } from './api'
+import { fetchCoworkers, fetchRoast, syncTranscripts } from './api'
 
 export default function App() {
   const [coworkers, setCoworkers] = useState([])
@@ -32,16 +32,6 @@ export default function App() {
     }
   }
 
-  async function handleUpload(file) {
-    if (!selected) return
-    try {
-      await uploadTranscript(selected, file)
-      await handleSelect(selected)
-    } catch {
-      setError('Failed to upload transcript.')
-    }
-  }
-
   return (
     <div className="app">
       <Sidebar coworkers={coworkers} selected={selected} onSelect={handleSelect} />
@@ -50,7 +40,6 @@ export default function App() {
         report={report}
         loading={loading}
         error={error}
-        onUpload={handleUpload}
       />
     </div>
   )
