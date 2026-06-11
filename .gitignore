@@ -3,6 +3,8 @@ backend/.venv/
 __pycache__/
 *.pyc
 backend/token.json
+backend/drive_token.json
+backend/credentials.json
 backend/.env
 
 # Node
