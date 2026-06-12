@@ -57,3 +57,13 @@ def test_preserves_punctuation_in_speaker_lines():
     txt = "John Smith: What's the ROI on this, Karen? It's... complicated."
     result = parse_transcript(txt, "notes.txt")
     assert result["John Smith"][0] == "What's the ROI on this, Karen? It's... complicated."
+
+
+def test_does_not_capture_non_name_prefixes():
+    txt = """TODO: fix this later
+Note: this is important
+John Smith: actual speaker line"""
+    result = parse_transcript(txt, "notes.txt")
+    assert "TODO" not in result
+    assert "Note" not in result
+    assert "John Smith" in result

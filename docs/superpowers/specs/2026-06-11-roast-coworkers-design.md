@@ -2,12 +2,12 @@
 
 ## Overview
 
-A private web app that ingests Slack messages, Gmail threads, and meeting transcripts for a given coworker, then uses Claude to generate a funny, satirical roast report about them. Built for personal use and a demo video.
+A private web app that ingests Slack messages, Gmail threads, and meeting transcripts from a given coworker (me), then uses Claude to generate a funny, satirical roast report about the coworkers mentioned or involved. Built for personal use and a demo video.
 
 ## Stack
 
 - **Backend**: Python + FastAPI
-- **Frontend**: React (Vite) served in development via Vite dev server, in production via Express
+- **Frontend**: React (Vite) — `vite dev` proxies API calls to FastAPI in development; Express serves the `dist/` build and proxies `/api/*` to FastAPI in production
 - **AI**: Claude API (`claude-sonnet-4-6`)
 - **Auth**: Personal API tokens stored in `.env` (Slack user token, Gmail credentials JSON)
 
@@ -32,14 +32,14 @@ backend/           FastAPI
 
 ## Data Flow
 
-1. On page load, `GET /coworkers` — backend scans recent Slack members and Gmail contacts, returns deduplicated list of names
+1. On page load, `GET /coworkers` — backend fetches all workspace members from the Slack API and recent unique senders from Gmail, returns deduplicated list of names
 2. User clicks a coworker → `POST /roast { name }`:
    - `slack_client` pulls recent messages from/about that person
    - `gmail_client` fetches recent threads involving them
-   - `transcript_parser` includes any previously uploaded transcript evidence
+   - `transcript_parser` includes any previously uploaded transcript evidence tagged to that person
    - All evidence assembled into a dossier `{ name, evidence: [str] }`
    - Dossier sent to `roast_generator`, which calls Claude and returns structured report
-3. Optional: user drags a `.txt` or `.vtt` file onto the upload zone → `POST /upload-transcript` → parsed and stored in memory for the session
+3. Optional: user drags a `.txt` or `.vtt` file onto the upload zone → `POST /upload-transcript { name, file }` → parsed and stored in-memory, keyed by coworker name, available for the session
 
 ## Roast Report Structure
 
